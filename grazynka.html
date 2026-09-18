@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grazynka's World - The Kitty Page</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Interactive Quiz Button in Sidebar (Warm Orange Theme) */
+        .sidebar-quiz-btn {
+            background: #ffffff;
+            color: #d97706;
+            border: 2px solid #d97706;
+            padding: 12px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+        }
+
+        .sidebar-quiz-btn:hover {
+            background: #d97706;
+            color: #ffffff;
+            transform: scale(1.03);
+            box-shadow: 0 0 18px rgba(217, 119, 6, 0.5);
+        }
+
+        /* Quiz Modal Overlay */
+        .quiz-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .quiz-modal-content {
+            background: #ffffff;
+            border: 3px solid #d97706;
+            box-shadow: 0 0 30px rgba(217, 119, 6, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-modal-content h3 {
+            color: #2d2d2d;
+            font-size: 20px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 6px rgba(217, 119, 6, 0.2);
+        }
+
+        .quiz-btn-container {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+        }
+
+        .quiz-ans-btn {
+            background: #fdfaf6;
+            color: #d97706;
+            border: 2px solid #d97706;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s, color 0.2s;
+        }
+
+        .quiz-ans-btn:hover {
+            background: #d97706;
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(217, 119, 6, 0.4);
+        }
+
+        .no-btn {
+            position: relative;
+            transition: left 0.15s ease, top 0.15s ease;
+        }
+
+        /* --- BACKGROUND MUSIC PLAYER WIDGET STYLES (Warm Orange Theme Matched) --- */
+        .music-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+        }
+
+        .cat-disk {
+            width: 50px;
+            height: 50px;
+            background: #d97706;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+            border: 2px solid #e2a058;
+            transition: transform 0.3s ease, background 0.2s;
+        }
+
+        .cat-disk:hover {
+            background: #b45309;
+        }
+
+        .cat-disk.playing {
+            animation: spinDisk 3s linear infinite;
+        }
+
+        @keyframes spinDisk {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .disk-center {
+            font-size: 22px;
+        }
+
+        .music-menu {
+            display: none;
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            background: #ffffff;
+            border: 2px solid #d97706;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(217, 119, 6, 0.3);
+            width: 220px;
+            text-align: center;
+        }
+
+        .music-menu h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #2d2d2d;
+        }
+
+        .song-btn {
+            display: block;
+            width: 100%;
+            background: #d97706;
+            color: #ffffff;
+            border: 2px solid #d97706;
+            padding: 8px 10px;
+            margin: 6px 0;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .song-btn:hover {
+            background: #b45309;
+            border-color: #b45309;
+        }
+    </style>
+
+    <!-- Custom Theme Override for Grazynka's Page (Grey & Orange Cat Vibe) -->
+    <style>
+        body {
+            background-color: #f4f5f7 !important;
+            color: #2d2d2d !important;
+        }
+
+        /* Sidebar Theme Overrides */
+        .sidebar {
+            background-color: #ffffff !important;
+            border-right: 3px solid #d97706 !important;
+            box-shadow: 4px 0 20px rgba(217, 119, 6, 0.15) !important;
+        }
+
+        .sidebar h2, .sidebar a, .sidebar-love-box h3, .sidebar-love-box p {
+            color: #2d2d2d !important;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #d97706 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 12px rgba(217, 119, 6, 0.4) !important;
+        }
+
+        .cute-couple-box, .sidebar-love-box {
+            background-color: #fdfaf6 !important;
+            border: 2px solid #e2a058 !important;
+            box-shadow: 0 0 15px rgba(226, 160, 88, 0.15) !important;
+        }
+
+        .couple-names {
+            color: #d97706 !important;
+            font-weight: bold;
+        }
+
+        /* Main Content Theme Overrides */
+        .main-content h1, .main-content p {
+            color: #2d2d2d !important;
+        }
+
+        .page-nav-box, .video-box, .heart-box, .fun-facts-box, .pic-slot {
+            background-color: #ffffff !important;
+            border: 2px solid #d97706 !important;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.15) !important;
+        }
+
+        .page-nav-box span, .fun-facts-box h3, .fun-facts-box ul, .pic-slot span, .video-placeholder {
+            color: #2d2d2d !important;
+        }
+
+        .page-nav-box a {
+            color: #d97706 !important;
+            font-weight: bold;
+        }
+
+        .page-nav-box a:hover {
+            color: #ffffff !important;
+            background-color: #d97706;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* Warm Orange & Grey Cat Heart */
+        .cute-heart-svg {
+            width: 100px;
+            height: 100px;
+            fill: #e69554 !important;
+            animation: catPulse 1.5s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(230, 149, 84, 0.5));
+        }
+
+        @keyframes catPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        .fun-facts-box ul {
+            color: #4a4a4a !important;
+        }
+
+        .pic-frame {
+            background-color: #fcf6ef !important;
+            border: 1px dashed #d97706 !important;
+        }
+        
+        .pic-slot span {
+            color: #d97706 !important;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Esti ✨</h2>
+        <a href="index.html">Home</a>
+        <a href="memories.html">Memories</a>
+        <a href="letter.html">Letter</a>
+
+        <!-- Interactive Cute Couple Model -->
+        <div class="cute-couple-box" onmouseenter="playLoveMessage()" title="Hover over us! 💕">
+            <svg viewBox="0 0 220 190" class="cute-couple-svg">
+                <!-- Left Figure (Woman with Dress) -->
+                <circle cx="65" cy="52" r="22" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <ellipse cx="58" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <ellipse cx="72" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <line x1="52" y1="57" x2="55" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="75" y1="57" x2="78" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 46,66 Q 30,54 35,42" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="35" cy="40" r="3.5" fill="#4a1525"/>
+                <path d="M 42,80 Q 65,75 88,80 L 102,145 Q 65,152 28,145 Z" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <line x1="52" y1="145" x2="46" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="43" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <line x1="78" y1="145" x2="84" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="87" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <path d="M 80,90 L 100,112" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+
+                <!-- Right Figure (Guy) -->
+                <circle cx="155" cy="52" r="22" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <ellipse cx="148" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <ellipse cx="162" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <line x1="142" y1="57" x2="145" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="165" y1="57" x2="168" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 134,80 Q 155,75 176,80 L 170,145 Q 155,152 140,145 Z" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <path d="M 140,90 L 120,112" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="110" cy="112" r="5" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <path d="M 174,66 Q 190,54 185,42" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="185" cy="40" r="3.5" fill="#4a1525"/>
+                <line x1="145" y1="145" x2="140" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="137" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <line x1="165" y1="145" x2="170" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="173" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <path d="M 110,80 Q 98,62 110,50 Q 122,62 110,80 Z" fill="#ff2442" stroke="#4a1525" stroke-width="2.5"/>
+            </svg>
+            <div class="couple-names">Sosa x Estera</div>
+        </div>
+
+        <!-- SURPRISE QUIZ BUTTON -->
+        <button class="sidebar-quiz-btn" onclick="openQuiz()">🐾 Surprise Question! ✨</button>
+
+        <!-- Cutesy Love Poem Box -->
+        <div class="sidebar-love-box">
+            <h3>To My Love ✨</h3>
+            <p>
+                Estera, my gorgeous lady<br>
+                you are the adorable girl<br>
+                who stumbled into my life<br>
+                when I least expected it.
+            </p>
+            <p>
+                You came in smoothly,<br>
+                like a cool breeze<br>
+                in the middle of autumn,<br>
+                carrying the refreshing scent of nature.
+            </p>
+            <p>
+                Everything about you draws me in:
+                the beautiful curve of your smile,
+                your captivating green eyes,
+                your grace, and your perfect height.
+            </p>
+            <p>
+                When you are smiling with pure joy,
+                that is what happiness truly is.
+                I love all the memories we have made
+                and all we have pushed through. ❤️
+            </p>
+            <p>
+                When I look at you, my heart beats
+                a melody composed just for you.
+                You have a unique, beautiful soul
+                connected entirely to mine, leaving<br>
+                me with pure love every moment i spend with you ✨
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1>Grazynka's Kitty Zone 🐱</h1>
+        <p>Welcome to the cozy grey and orange corner!</p>
+
+        <div class="estera-content-wrapper" style="width: 100%; max-width: 950px; display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- Box 9: Page Number & Next Link -->
+            <div class="page-nav-box" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; border-radius: 15px;">
+                <span>Page: Grazynka 🐾</span>
+                <a href="sosa.html">Next ➔</a>
+            </div>
+
+            <!-- Middle Row (Boxes 3, 2, and 1) -->
+            <div class="estera-middle-row" style="display: flex; gap: 20px; align-items: stretch;">
+                
+                <!-- Box 3: Video Introduction -->
+                <div class="video-box" style="flex: 2; border-radius: 20px; padding: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 280px;">
+                    <video controls style="width: 100%; height: 100%; max-height: 250px; border-radius: 12px; object-fit: cover; background: #000;">
+                        <source src="grazynka-intro.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span class="video-placeholder" style="margin-top: 8px;">Grazynka's Intro Video 🎥</span>
+                </div>
+
+                <!-- Box 2: Orange & Grey Heart Graphic -->
+                <div class="heart-box" style="flex: 1; display: flex; justify-content: center; align-items: center; border-radius: 20px; padding: 15px;">
+                    <svg viewBox="0 0 24 24" class="cute-heart-svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+
+                <!-- Box 1: White Fun Facts Box -->
+                <div class="fun-facts-box" style="flex: 1.5; border-radius: 20px; padding: 20px;">
+                    <h3 style="text-align: center; margin-top: 0; margin-bottom: 12px;">Fun Facts about Grazynka 🐾</h3>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.6;">
+                        <li>Professional nap supervisor 💤</li>
+                        <li>Gorgeous grey and orange coat 🐈</li>
+                        <li>Absolute queen of the house</li>
+                        <li>Master of cute meows</li>
+                        <li>Add your own fun facts here!</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Row (Boxes 4 to 8: Pictures) -->
+            <div class="estera-bottom-row" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+                <div class="pic-slot" style="border-radius: 15px; padding: 10px; text-align: center;">
+                    <div class="pic-frame" style="width: 100%; height: 110px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; margin-bottom: 6px;">
+                        <img src="grazynka-1.jpg" alt="Pic 4" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+                        <span class="placeholder-text" style="color: #666; font-size: 11px;">Photo 4</span>
+                    </div>
+                    <span>Memory 1</span>
+                </div>
+
+                <div class="pic-slot" style="border-radius: 15px; padding: 10px; text-align: center;">
+                    <div class="pic-frame" style="width: 100%; height: 110px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; margin-bottom: 6px;">
+                        <img src="grazynka-2.jpg" alt="Pic 5" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+                        <span class="placeholder-text" style="color: #666; font-size: 11px;">Photo 5</span>
+                    </div>
+                    <span>Memory 2</span>
+                </div>
+
+                <div class="pic-slot" style="border-radius: 15px; padding: 10px; text-align: center;">
+                    <div class="pic-frame" style="width: 100%; height: 110px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; margin-bottom: 6px;">
+                        <img src="grazynka-3.jpg" alt="Pic 6" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+                        <span class="placeholder-text" style="color: #666; font-size: 11px;">Photo 6</span>
+                    </div>
+                    <span>Memory 3</span>
+                </div>
+
+                <div class="pic-slot" style="border-radius: 15px; padding: 10px; text-align: center;">
+                    <div class="pic-frame" style="width: 100%; height: 110px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; margin-bottom: 6px;">
+                        <img src="grazynka-4.jpg" alt="Pic 7" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+                        <span class="placeholder-text" style="color: #666; font-size: 11px;">Photo 7</span>
+                    </div>
+                    <span>Memory 4</span>
+                </div>
+
+                <div class="pic-slot" style="border-radius: 15px; padding: 10px; text-align: center;">
+                    <div class="pic-frame" style="width: 100%; height: 110px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; margin-bottom: 6px;">
+                        <img src="grazynka-5.jpg" alt="Pic 8" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+                        <span class="placeholder-text" style="color: #666; font-size: 11px;">Photo 8</span>
+                    </div>
+                    <span>Memory 5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- QUIZ MODAL POPUP CONTAINER -->
+    <div id="quiz-modal" class="quiz-modal-overlay" style="display: none;">
+        <div class="quiz-modal-content">
+            <h3 id="quiz-question">Are you Estera?</h3>
+            <div id="quiz-buttons" class="quiz-btn-container">
+                <!-- Dynamically populated buttons -->
+            </div>
+        </div>
+    </div>
+
+    <!-- BACKGROUND MUSIC PLAYER WIDGET HTML -->
+    <div id="musicPlayerWidget" class="music-widget">
+        <audio id="bgAudio" loop></audio>
+        
+        <div id="musicMenu" class="music-menu">
+            <h4>Choose a vibe 🎶</h4>
+            <button class="song-btn" onclick="playSong('song1.mp3')">Song 1: Cozy Lofi 🎧</button>
+            <button class="song-btn" onclick="playSong('song2.mp3')">Song 2: Sweet Melody 💕</button>
+            <button class="song-btn" onclick="playSong('song3.mp3')">Song 3: Dreamy Beats ✨</button>
+        </div>
+
+        <div id="musicDisk" class="cat-disk" title="Click for music menu">
+            <span class="disk-center">💿</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function playLoveMessage() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance("I love you baby");
+                utterance.rate = 0.95;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Quiz State Machine Logic
+        function openQuiz() {
+            document.getElementById('quiz-modal').style.display = 'flex';
+            loadQuestion(1);
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-modal').style.display = 'none';
+        }
+
+        function loadQuestion(step) {
+            const qTitle = document.getElementById('quiz-question');
+            const btnContainer = document.getElementById('quiz-buttons');
+            btnContainer.innerHTML = '';
+
+            if (step === 1) {
+                qTitle.innerText = "Are you Estera?";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion(2)">Yes</button>
+                    <button class="quiz-ans-btn no-btn" onmouseenter="moveButton(this)">No</button>
+                `;
+            } else if (step === 2) {
+                qTitle.innerText = "Do you love sosa?";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion(3)">Yes</button>
+                    <button class="quiz-ans-btn no-btn" onmouseenter="moveButton(this)">No</button>
+                `;
+            } else if (step === 3) {
+                qTitle.innerText = "Sosa is gonna steal you away 💖";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion('3b')">No</button>
+                    <button class="quiz-ans-btn" onclick="loadQuestion(4)">Yes</button>
+                `;
+            } else if (step === '3b') {
+                qTitle.innerText = "Are you sureeee you??";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion('3c')">No baby im kidding</button>
+                    <button class="quiz-ans-btn no-btn" onmouseenter="moveButton(this)" onclick="alert('Caught you! 🤭'); loadQuestion(3);">Yes i am</button>
+                `;
+            } else if (step === '3c') {
+                qTitle.innerText = "Who's a good girl?";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="closeQuiz()" style="background: #d97706; color: #ffffff; border-color: #d97706;">Mee, i amm!!!</button>
+                `;
+            } else if (step === 4) {
+                qTitle.innerText = "Not like you have a choice would have stolen you anyway <3";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="closeQuiz()" style="background: #d97706; color: #ffffff; border-color: #d97706;">No fairr :c</button>
+                `;
+            }
+        }
+
+        // Fast & further away sliding animation for hovered buttons
+        function moveButton(btn) {
+            let randomX = (Math.random() - 0.5) * 240;
+            let randomY = (Math.random() - 0.5) * 140;
+            
+            btn.style.position = 'relative';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        // --- MUSIC WIDGET LOGIC ---
+        const musicDisk = document.getElementById("musicDisk");
+        const musicMenu = document.getElementById("musicMenu");
+        const bgAudio = document.getElementById("bgAudio");
+
+        musicDisk.onclick = function(e) {
+            e.stopPropagation();
+            if (musicMenu.style.display === "block") {
+                musicMenu.style.display = "none";
+            } else {
+                musicMenu.style.display = "block";
+            }
+        };
+
+        window.onclick = function(event) {
+            if (!musicMenu.contains(event.target) && event.target !== musicDisk && !musicDisk.contains(event.target)) {
+                musicMenu.style.display = "none";
+            }
+        };
+
+        function playSong(songUrl) {
+            bgAudio.src = songUrl;
+            bgAudio.play().catch(error => {
+                console.log("Audio playback error or file missing:", error);
+            });
+            musicDisk.classList.add("playing");
+            musicMenu.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

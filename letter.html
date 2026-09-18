@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Estera's World - Bright Cyan & Clouds Theme</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Custom Theme Override for Letter Page (Cyan & Clouds) -->
+    <style>
+        body {
+            background-color: #0c4a6e !important;
+            color: #f0f9ff !important;
+            background-image: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.2) 0%, transparent 40%),
+                              radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.2) 0%, transparent 40%) !important;
+        }
+
+        /* Sidebar Theme Overrides */
+        .sidebar {
+            background-color: #075985 !important;
+            border-right: 3px solid #38bdf8 !important;
+            box-shadow: 4px 0 25px rgba(56, 189, 248, 0.3) !important;
+        }
+
+        .sidebar h2, .sidebar a, .sidebar-love-box h3, .sidebar-love-box p {
+            color: #f0f9ff !important;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.8) !important;
+        }
+
+        .cute-couple-box, .sidebar-love-box {
+            background-color: #0284c7 !important;
+            border: 2px solid #7dd3fc !important;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
+            border-radius: 20px !important;
+        }
+
+        .couple-names {
+            color: #e0f2fe !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+        }
+
+        /* Main Content Theme Overrides */
+        .main-content {
+            max-width: none !important;
+            width: 100% !important;
+            padding: 15px 35px !important;
+        }
+
+        .main-content h1 {
+            color: #f0f9ff !important;
+            opacity: 1 !important;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .main-content p {
+            color: #bae6fd !important;
+            opacity: 1 !important;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .page-nav-box {
+            background-color: #0284c7 !important;
+            border: 2px solid #38bdf8 !important;
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.3) !important;
+            border-radius: 20px !important;
+        }
+
+        .page-nav-box span {
+            color: #f0f9ff !important;
+            font-weight: bold;
+        }
+
+        .page-nav-box a, .page-nav-box button {
+            color: #e0f2fe !important;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-box a:hover, .page-nav-box button:hover {
+            color: #ffffff !important;
+            background-color: #0369a1;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+
+        /* Two-Column Letter Layout & Title Rectangles */
+        .letters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .letter-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        /* Cyan Title Rectangles */
+        .letter-title-box {
+            background-color: #0284c7;
+            border: 2px solid #38bdf8;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+        }
+
+        /* White Taller Rectangular Letter Box Styling */
+        .letter-content-box {
+            background-color: #ffffff; /* Pure white inside */
+            border: 2px solid #38bdf8;
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.3);
+            border-radius: 20px;
+            padding: 40px 40px;
+            line-height: 1.9;
+            font-size: 14.5px;
+            color: #0c4a6e; /* Deep cyan readable text */
+            position: relative;
+            min-height: 620px;
+            flex-grow: 1;
+            background-image: linear-gradient(rgba(2, 132, 199, 0.08) 1px, transparent 1px);
+            background-size: 100% 28px; /* Notebook lines spacing */
+        }
+
+        /* Visible Line-Art Peony Flower Corners */
+        .peony-corner {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            pointer-events: none;
+            opacity: 0.75;
+        }
+        .peony-tl { top: 12px; left: 12px; transform: scaleX(-1); }
+        .peony-tr { top: 12px; right: 12px; }
+        .peony-bl { bottom: 12px; left: 12px; transform: scale(-1, -1); }
+        .peony-br { bottom: 12px; right: 12px; transform: scaleY(-1); }
+
+        /* --- BACKGROUND MUSIC PLAYER WIDGET STYLES (Cyan Theme Matched) --- */
+        .music-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+        }
+
+        .cat-disk {
+            width: 50px;
+            height: 50px;
+            background: #075985;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            border: 2px solid #38bdf8;
+            transition: transform 0.3s ease, background 0.2s;
+        }
+
+        .cat-disk:hover {
+            background: #0284c7;
+        }
+
+        .cat-disk.playing {
+            animation: spinDisk 3s linear infinite;
+        }
+
+        @keyframes spinDisk {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .disk-center {
+            font-size: 22px;
+        }
+
+        .music-menu {
+            display: none;
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            background: #ffffff;
+            border: 2px solid #38bdf8;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            width: 220px;
+            text-align: center;
+        }
+
+        .music-menu h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #0c4a6e;
+        }
+
+        .song-btn {
+            display: block;
+            width: 100%;
+            background: #0284c7;
+            color: #ffffff;
+            border: 2px solid #0284c7;
+            padding: 8px 10px;
+            margin: 6px 0;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .song-btn:hover {
+            background: #075985;
+            border-color: #075985;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Esti ✨</h2>
+        <a href="index.html">Home</a>
+        <a href="memories.html">Memories</a>
+        <a href="letter.html" class="active">Letter</a>
+
+        <!-- Interactive Cute Couple Model -->
+        <div class="cute-couple-box" onmouseenter="playLoveMessage()" title="Hover over us! 💕">
+            <svg viewBox="0 0 220 190" class="cute-couple-svg">
+                <!-- Left Figure (Woman with Dress) -->
+                <circle cx="65" cy="52" r="22" fill="#fff" stroke="#0c4a6e" stroke-width="3.5"/>
+                <ellipse cx="58" cy="50" rx="2.5" ry="4" fill="#0c4a6e"/>
+                <ellipse cx="72" cy="50" rx="2.5" ry="4" fill="#0c4a6e"/>
+                <line x1="52" y1="57" x2="55" y2="62" stroke="#0c4a6e" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="75" y1="57" x2="78" y2="62" stroke="#0c4a6e" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 46,66 Q 30,54 35,42" fill="none" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="35" cy="40" r="3.5" fill="#0c4a6e"/>
+                <path d="M 42,80 Q 65,75 88,80 L 102,145 Q 65,152 28,145 Z" fill="#e0f2fe" stroke="#0c4a6e" stroke-width="3.5"/>
+                <line x1="52" y1="145" x2="46" y2="170" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="43" cy="172" rx="6" ry="3.5" fill="#0c4a6e"/>
+                <line x1="78" y1="145" x2="84" y2="170" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="87" cy="172" rx="6" ry="3.5" fill="#0c4a6e"/>
+                <path d="M 80,90 L 100,112" fill="none" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+
+                <!-- Right Figure (Guy) -->
+                <circle cx="155" cy="52" r="22" fill="#fff" stroke="#0c4a6e" stroke-width="3.5"/>
+                <ellipse cx="148" cy="50" rx="2.5" ry="4" fill="#0c4a6e"/>
+                <ellipse cx="162" cy="50" rx="2.5" ry="4" fill="#0c4a6e"/>
+                <line x1="142" y1="57" x2="145" y2="62" stroke="#0c4a6e" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="165" y1="57" x2="168" y2="62" stroke="#0c4a6e" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 134,80 Q 155,75 176,80 L 170,145 Q 155,152 140,145 Z" fill="#e0f2fe" stroke="#0c4a6e" stroke-width="3.5"/>
+                <path d="M 140,90 L 120,112" fill="none" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="110" cy="112" r="5" fill="#fff" stroke="#0c4a6e" stroke-width="3.5"/>
+                <path d="M 174,66 Q 190,54 185,42" fill="none" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="185" cy="40" r="3.5" fill="#0c4a6e"/>
+                <line x1="145" y1="145" x2="140" y2="170" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="137" cy="172" rx="6" ry="3.5" fill="#0c4a6e"/>
+                <line x1="165" y1="145" x2="170" y2="170" stroke="#0c4a6e" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="173" cy="172" rx="6" ry="3.5" fill="#0c4a6e"/>
+                <path d="M 110,80 Q 98,62 110,50 Q 122,62 110,80 Z" fill="#38bdf8" stroke="#0c4a6e" stroke-width="2.5"/>
+            </svg>
+            <div class="couple-names">Sosa x Estera</div>
+        </div>
+
+        <!-- Cutesy Love Poem Box -->
+        <div class="sidebar-love-box">
+            <h3>To My Love ✨</h3>
+            <p>
+                Estera, my gorgeous lady<br>
+                you are the adorable girl<br>
+                who stumbled into my life<br>
+                when I least expected it.
+            </p>
+            <p>
+                You came in smoothly,<br>
+                like a cool breeze<br>
+                in the middle of autumn,<br>
+                carrying the refreshing scent of nature.
+            </p>
+            <p>
+                Everything about you draws me in:
+                the beautiful curve of your smile,
+                your captivating green eyes,
+                your grace, and your perfect height.
+            </p>
+            <p>
+                When you are smiling with pure joy,
+                that is what happiness truly is.
+                I love all the memories we have made
+                and all we have pushed through. ❤️
+            </p>
+            <p>
+                When I look at you, my heart beats
+                a melody composed just for you.
+                You have a unique, beautiful soul
+                connected entirely to mine, leaving<br>
+                me with pure love every moment i spend with you ✨
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1>A Letter For You ☁️💙</h1>
+        <p>Words straight from my heart, floating on clouds just for you.</p>
+
+        <div class="estera-content-wrapper" style="width: 100%; max-width: 1450px; display: flex; flex-direction: column; gap: 15px;">
+            
+            <!-- Page Navigation Box with Notebook Pagination -->
+            <div class="page-nav-box" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 22px;">
+                <a href="memories.html">⬅️ Back to Memories</a>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <button onclick="prevLetterPage()" title="Previous Page" style="font-size: 18px; padding: 0 6px;">⬅</button>
+                    <span id="page-indicator">Pages 1-2 / 60</span> 
+                    <button onclick="nextLetterPage()" title="Next Page" style="font-size: 18px; padding: 0 6px;">➔</button>
+                </div>
+                <a href="index.html">Home ➔</a>
+            </div>
+
+            <!-- Two Tall White Letter Boxes Grid -->
+            <div class="letters-grid">
+                
+                <!-- Left Letter Column -->
+                <div class="letter-column">
+                    <div class="letter-title-box" id="left-title">Letter — Page 1 ☁️</div>
+                    <div class="letter-content-box">
+                        <!-- Line-Art Peony Flower Corners -->
+                        <svg class="peony-corner peony-tl" viewBox="0 0 50 50" fill="none" stroke="#0284c7" stroke-width="1.8">
+                            <path d="M5 25 C15 25 25 15 25 5 C25 15 35 25 45 25 C35 25 25 35 25 45 C25 35 15 25 5 25 Z" />
+                            <circle cx="25" cy="25" r="4"/>
+                            <path d="M25 25 Q 10 10 2 2 M25 25 Q 40 10 48 2"/>
+                        </svg>
+                        <svg class="peony-corner peony-br" viewBox="0 0 50 50" fill="none" stroke="#0284c7" stroke-width="1.8">
+                            <path d="M5 25 C15 25 25 15 25 5 C25 15 35 25 45 25 C35 25 25 35 25 45 C25 35 15 25 5 25 Z" />
+                            <circle cx="25" cy="25" r="4"/>
+                            <path d="M25 25 Q 10 10 2 2 M25 25 Q 40 10 48 2"/>
+                        </svg>
+
+                        <div id="left-content">
+                            <!-- Blank for your writing -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Letter Column -->
+                <div class="letter-column">
+                    <div class="letter-title-box" id="right-title">Letter — Page 2 💙</div>
+                    <div class="letter-content-box">
+                        <!-- Line-Art Peony Flower Corners -->
+                        <svg class="peony-corner peony-tr" viewBox="0 0 50 50" fill="none" stroke="#0284c7" stroke-width="1.8">
+                            <path d="M5 25 C15 25 25 15 25 5 C25 15 35 25 45 25 C35 25 25 35 25 45 C25 35 15 25 5 25 Z" />
+                            <circle cx="25" cy="25" r="4"/>
+                            <path d="M25 25 Q 10 10 2 2 M25 25 Q 40 10 48 2"/>
+                        </svg>
+                        <svg class="peony-corner peony-bl" viewBox="0 0 50 50" fill="none" stroke="#0284c7" stroke-width="1.8">
+                            <path d="M5 25 C15 25 25 15 25 5 C25 15 35 25 45 25 C35 25 25 35 25 45 C25 35 15 25 5 25 Z" />
+                            <circle cx="25" cy="25" r="4"/>
+                            <path d="M25 25 Q 10 10 2 2 M25 25 Q 40 10 48 2"/>
+                        </svg>
+
+                        <div id="right-content">
+                            <!-- Blank for your writing -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BACKGROUND MUSIC PLAYER WIDGET HTML -->
+    <div id="musicPlayerWidget" class="music-widget">
+        <audio id="bgAudio" loop></audio>
+        
+        <div id="musicMenu" class="music-menu">
+            <h4>Choose a vibe 🎶</h4>
+            <button class="song-btn" onclick="playSong('song1.mp3')">Song 1: Cozy Lofi 🎧</button>
+            <button class="song-btn" onclick="playSong('song2.mp3')">Song 2: Sweet Melody 💕</button>
+            <button class="song-btn" onclick="playSong('song3.mp3')">Song 3: Dreamy Beats ✨</button>
+        </div>
+
+        <div id="musicDisk" class="cat-disk" title="Click for music menu">
+            <span class="disk-center">💿</span>
+        </div>
+    </div>
+
+    <!-- JavaScript for 60 Pages Notebook Pagination, Speech & Music Widget -->
+    <script>
+        // Automatically generate 60 pages total (30 spreads of 2 pages each)
+        const letterPages = [];
+        for (let i = 1; i <= 30; i++) {
+            let leftNum = (i - 1) * 2 + 1;
+            let rightNum = (i - 1) * 2 + 2;
+            letterPages.push({
+                leftTitle: `Letter — Page ${leftNum} ☁️`,
+                rightTitle: `Letter — Page ${rightNum} 💙`,
+                leftHtml: "",
+                rightHtml: ""
+            });
+        }
+
+        let currentPage = 0;
+
+        function updatePageDisplay() {
+            document.getElementById('left-title').innerText = letterPages[currentPage].leftTitle;
+            document.getElementById('right-title').innerText = letterPages[currentPage].rightTitle;
+            document.getElementById('left-content').innerHTML = letterPages[currentPage].leftHtml;
+            document.getElementById('right-content').innerHTML = letterPages[currentPage].rightHtml;
+            
+            let leftNum = currentPage * 2 + 1;
+            let rightNum = currentPage * 2 + 2;
+            document.getElementById('page-indicator').innerText = `Pages ${leftNum}-${rightNum} / 60`;
+        }
+
+        function nextLetterPage() {
+            currentPage = (currentPage + 1) % letterPages.length;
+            updatePageDisplay();
+        }
+
+        function prevLetterPage() {
+            currentPage = (currentPage - 1 + letterPages.length) % letterPages.length;
+            updatePageDisplay();
+        }
+
+        function playLoveMessage() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance("I love you baby");
+                utterance.rate = 0.95;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // --- MUSIC WIDGET LOGIC ---
+        const musicDisk = document.getElementById("musicDisk");
+        const musicMenu = document.getElementById("musicMenu");
+        const bgAudio = document.getElementById("bgAudio");
+
+        musicDisk.onclick = function(e) {
+            e.stopPropagation();
+            if (musicMenu.style.display === "block") {
+                musicMenu.style.display = "none";
+            } else {
+                musicMenu.style.display = "block";
+            }
+        };
+
+        window.onclick = function(event) {
+            if (!musicMenu.contains(event.target) && event.target !== musicDisk && !musicDisk.contains(event.target)) {
+                musicMenu.style.display = "none";
+            }
+        };
+
+        function playSong(songUrl) {
+            bgAudio.src = songUrl;
+            bgAudio.play().catch(error => {
+                console.log("Audio playback error or file missing:", error);
+            });
+            musicDisk.classList.add("playing");
+            musicMenu.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

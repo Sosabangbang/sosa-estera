@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memories - For Esti ❤️</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Prevent Page Scrolling & Enforce Viewport Fit */
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: #fff0f5 !important;
+            color: #111111 !important;
+            font-family: inherit;
+        }
+
+        /* Top Corner Quick Navigation Buttons */
+        .top-corner-nav {
+            position: absolute;
+            top: 15px;
+            left: 280px; 
+            right: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .corner-btn {
+            pointer-events: auto;
+            background-color: #111111;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid #111111;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            text-transform: lowercase;
+        }
+
+        .corner-btn:hover {
+            background-color: #ffffff;
+            color: #111111;
+        }
+
+        /* Sidebar Quiz Button Styling */
+        .sidebar-quiz-btn {
+            background: #111111;
+            color: #ffffff;
+            border: 2px solid #111111;
+            padding: 10px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin: 12px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background 0.2s, color 0.2s;
+        }
+
+        .sidebar-quiz-btn:hover {
+            background: #ffffff;
+            color: #111111;
+            transform: scale(1.02);
+        }
+
+        /* Quiz Modal Overlay */
+        .quiz-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+
+        .quiz-modal-content {
+            background: #ffffff;
+            border: 3px solid #111111;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-modal-content h3 {
+            color: #111111;
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-btn-container {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+        }
+
+        .quiz-ans-btn {
+            background: #111111;
+            color: #ffffff;
+            border: 2px solid #111111;
+            padding: 8px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s, color 0.2s;
+        }
+
+        .quiz-ans-btn:hover {
+            background: #ffffff;
+            color: #111111;
+        }
+
+        .no-btn {
+            position: relative;
+            transition: left 0.15s ease, top 0.15s ease;
+        }
+
+        /* Layout Architecture */
+        body {
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .sidebar {
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #111111 !important;
+            border-right: 3px solid #111111 !important;
+        }
+
+        .sidebar h2, .sidebar a {
+            color: #ffffff !important;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #333333 !important;
+            color: #ffffff !important;
+        }
+
+        .cute-couple-box, .sidebar-love-box {
+            background-color: #ffffff !important;
+            border: 2px solid #111111 !important;
+            border-radius: 16px !important;
+        }
+
+        .sidebar-love-box h3, .sidebar-love-box p {
+            color: #111111 !important;
+        }
+
+        .couple-names {
+            color: #111111 !important;
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex: 1;
+            height: 100vh;
+            overflow: hidden;
+            padding: 12px 25px 8px 25px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-content h1 {
+            color: #111111 !important;
+            font-size: 24px;
+            margin-top: 4px;
+            margin-bottom: 2px;
+        }
+
+        .main-content p {
+            color: #555555 !important;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        /* Pagination Bar Styling */
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .page-nav-btn {
+            background-color: #111111;
+            color: #ffffff;
+            border: 2px solid #111111;
+            padding: 3px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-btn:hover {
+            background-color: #ffffff;
+            color: #111111;
+        }
+
+        .page-indicator {
+            font-weight: bold;
+            color: #111111;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Large Expanded Layout */
+        .memories-extended-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1520px;
+            flex: 1;
+            padding: 0 5px;
+        }
+
+        .long-memory-card {
+            background-color: #ffffff !important;
+            border: 2px solid #111111 !important;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 195px;
+        }
+
+        .long-pic-frame {
+            background-color: #ffffff !important;
+            border: 2px dashed #111111 !important;
+            border-radius: 12px;
+            height: 385px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .center-clusters-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .memory-cluster {
+            display: grid;
+            grid-template-columns: repeat(2, 195px);
+            gap: 12px;
+        }
+
+        .memory-card {
+            background-color: #ffffff !important;
+            border: 2px solid #111111 !important;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .pic-frame {
+            background-color: #ffffff !important;
+            border: 2px dashed #111111 !important;
+            border-radius: 12px;
+            height: 155px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .placeholder-text {
+            color: #666666 !important;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .memory-caption {
+            color: #111111 !important;
+            font-weight: bold;
+            text-align: center;
+            font-size: 12.5px;
+        }
+
+        /* --- BACKGROUND MUSIC PLAYER WIDGET STYLES --- */
+        .music-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+        }
+
+        .cat-disk {
+            width: 50px;
+            height: 50px;
+            background: #111111;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            border: 2px solid #ffffff;
+            transition: transform 0.3s ease, background 0.2s;
+        }
+
+        .cat-disk:hover {
+            background: #333333;
+        }
+
+        .cat-disk.playing {
+            animation: spinDisk 3s linear infinite;
+        }
+
+        @keyframes spinDisk {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .disk-center {
+            font-size: 22px;
+        }
+
+        .music-menu {
+            display: none;
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            background: #ffffff;
+            border: 2px solid #111111;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 220px;
+            text-align: center;
+        }
+
+        .music-menu h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #111111;
+        }
+
+        .song-btn {
+            display: block;
+            width: 100%;
+            background: #111111;
+            color: #ffffff;
+            border: 2px solid #111111;
+            padding: 8px 10px;
+            margin: 6px 0;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .song-btn:hover {
+            background: #ffffff;
+            color: #111111;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Corner Quick Navigation Links -->
+    <div class="top-corner-nav">
+        <a href="index.html" class="corner-btn">home</a>
+        <a href="letter.html" class="corner-btn">letters</a>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Esti ✨</h2>
+        <a href="index.html">Home</a>
+        <a href="memories.html" class="active">Memories</a>
+        <a href="letter.html">Letter</a>
+
+        <!-- Interactive Cute Couple Model -->
+        <div class="cute-couple-box" onmouseenter="playLoveMessage()" title="Hover over us! 💕">
+            <svg viewBox="0 0 220 190" class="cute-couple-svg">
+                <!-- Left Figure (Woman with Dress) -->
+                <circle cx="65" cy="52" r="22" fill="#fff" stroke="#111111" stroke-width="3.5"/>
+                <ellipse cx="58" cy="50" rx="2.5" ry="4" fill="#111111"/>
+                <ellipse cx="72" cy="50" rx="2.5" ry="4" fill="#111111"/>
+                <line x1="52" y1="57" x2="55" y2="62" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="75" y1="57" x2="78" y2="62" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 46,66 Q 30,54 35,42" fill="none" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="35" cy="40" r="3.5" fill="#111111"/>
+                <path d="M 42,80 Q 65,75 88,80 L 102,145 Q 65,152 28,145 Z" fill="#ffffff" stroke="#111111" stroke-width="3.5"/>
+                <line x1="52" y1="145" x2="46" y2="170" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="43" cy="172" rx="6" ry="3.5" fill="#111111"/>
+                <line x1="78" y1="145" x2="84" y2="170" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="87" cy="172" rx="6" ry="3.5" fill="#111111"/>
+                <path d="M 80,90 L 100,112" fill="none" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+
+                <!-- Right Figure (Guy) -->
+                <circle cx="155" cy="52" r="22" fill="#fff" stroke="#111111" stroke-width="3.5"/>
+                <ellipse cx="148" cy="50" rx="2.5" ry="4" fill="#111111"/>
+                <ellipse cx="162" cy="50" rx="2.5" ry="4" fill="#111111"/>
+                <line x1="142" y1="57" x2="145" y2="62" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="165" y1="57" x2="168" y2="62" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 134,80 Q 155,75 176,80 L 170,145 Q 155,152 140,145 Z" fill="#ffffff" stroke="#111111" stroke-width="3.5"/>
+                <path d="M 140,90 L 120,112" fill="none" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="110" cy="112" r="5" fill="#fff" stroke="#111111" stroke-width="3.5"/>
+                <path d="M 174,66 Q 190,54 185,42" fill="none" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="185" cy="40" r="3.5" fill="#111111"/>
+                <line x1="145" y1="145" x2="140" y2="170" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="137" cy="172" rx="6" ry="3.5" fill="#111111"/>
+                <line x1="165" y1="145" x2="170" y2="170" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="173" cy="172" rx="6" ry="3.5" fill="#111111"/>
+                <path d="M 110,80 Q 98,62 110,50 Q 122,62 110,80 Z" fill="#111111" stroke="#111111" stroke-width="2.5"/>
+            </svg>
+            <div class="couple-names">Sosa x Estera</div>
+        </div>
+
+        <!-- SURPRISE QUIZ BUTTON -->
+        <button class="sidebar-quiz-btn" onclick="openQuiz()">💖 Surprise Question! ✨</button>
+
+        <!-- Cutesy Love Poem Box -->
+        <div class="sidebar-love-box">
+            <h3>To My Love ✨</h3>
+            <p>
+                Estera, my gorgeous lady<br>
+                you are the adorable girl<br>
+                who stumbled into my life<br>
+                when I least expected it.
+            </p>
+            <p>
+                You came in smoothly,<br>
+                like a cool breeze<br>
+                in the middle of autumn,<br>
+                carrying the refreshing scent of nature.
+            </p>
+            <p>
+                Everything about you draws me in:
+                the beautiful curve of your smile,
+                your captivating green eyes,
+                your grace, and your perfect height.
+            </p>
+            <p>
+                When you are smiling with pure joy,
+                that is what happiness truly is.
+                I love all the memories we have made
+                and all we have pushed through. ❤️
+            </p>
+            <p>
+                When I look at you, my heart beats
+                a melody composed just for you.
+                You have a unique, beautiful soul
+                connected entirely to mine, leaving<br>
+                me with pure love every moment i spend with you ✨
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1>Our Sweet Memories ✨</h1>
+        <p>Every single moment with you is my favorite, my love!</p>
+
+        <!-- Pagination Bar (1 / 60) -->
+        <div class="pagination-container">
+            <button class="page-nav-btn" onclick="changePage(-1)">❮</button>
+            <span id="page-indicator" class="page-indicator">1 / 60</span>
+            <button class="page-nav-btn" onclick="changePage(1)">❯</button>
+        </div>
+
+        <!-- Large Expanded Layout: Long Left + 8 Photos (2 clusters) + Long Right -->
+        <div class="memories-extended-wrapper">
+            
+            <!-- Far Left Long Photo Frame -->
+            <div class="long-memory-card">
+                <div class="long-pic-frame">
+                    <span id="long-left-text" class="placeholder-text">Long Left</span>
+                </div>
+                <span id="long-left-caption" class="memory-caption">Special Vibe ✨</span>
+            </div>
+
+            <!-- Center Clusters Area -->
+            <div class="center-clusters-area">
+                
+                <!-- Left Group (Photos 1 to 4) -->
+                <div class="memory-cluster">
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p1-text" class="placeholder-text">Photo 1</span>
+                        </div>
+                        <span id="p1-cap" class="memory-caption">Our special date ❤️</span>
+                    </div>
+
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p2-text" class="placeholder-text">Photo 2</span>
+                        </div>
+                        <span id="p2-cap" class="memory-caption">Cutie smiling ✨</span>
+                    </div>
+
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p3-text" class="placeholder-text">Photo 3</span>
+                        </div>
+                        <span id="p3-cap" class="memory-caption">Forever with you 💕</span>
+                    </div>
+
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p4-text" class="placeholder-text">Photo 4</span>
+                        </div>
+                        <span id="p4-cap" class="memory-caption">Happy days 🥰</span>
+                    </div>
+                </div>
+
+                <!-- Right Group (Photos 5 to 8) -->
+                <div class="memory-cluster">
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p5-text" class="placeholder-text">Photo 5</span>
+                        </div>
+                        <span id="p5-cap" class="memory-caption">Sweet moments 🌸</span>
+                    </div>
+
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p6-text" class="placeholder-text">Photo 6</span>
+                        </div>
+                        <span id="p6-cap" class="memory-caption">Best times ✨</span>
+                    </div>
+
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p7-text" class="placeholder-text">Photo 7</span>
+                        </div>
+                        <span id="p7-cap" class="memory-caption">My favorite view 💖</span>
+                    </div>
+
+                    <div class="memory-card">
+                        <div class="pic-frame">
+                            <span id="p8-text" class="placeholder-text">Photo 8</span>
+                        </div>
+                        <span id="p8-cap" class="memory-caption">Endless love 💍</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Far Right Long Photo Frame -->
+            <div class="long-memory-card">
+                <div class="long-pic-frame">
+                    <span id="long-right-text" class="placeholder-text">Long Right</span>
+                </div>
+                <span id="long-right-caption" class="memory-caption">Forever Us 💍</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- QUIZ MODAL POPUP CONTAINER -->
+    <div id="quiz-modal" class="quiz-modal-overlay" style="display: none;">
+        <div class="quiz-modal-content">
+            <h3 id="quiz-question">Are you Estera?</h3>
+            <div id="quiz-buttons" class="quiz-btn-container">
+                <!-- Dynamically populated buttons -->
+            </div>
+        </div>
+    </div>
+
+    <!-- BACKGROUND MUSIC PLAYER WIDGET HTML -->
+    <div id="musicPlayerWidget" class="music-widget">
+        <audio id="bgAudio" loop></audio>
+        
+        <div id="musicMenu" class="music-menu">
+            <h4>Choose a vibe 🎶</h4>
+            <button class="song-btn" onclick="playSong('song1.mp3')">Song 1: Cozy Lofi 🎧</button>
+            <button class="song-btn" onclick="playSong('song2.mp3')">Song 2: Sweet Melody 💕</button>
+            <button class="song-btn" onclick="playSong('song3.mp3')">Song 3: Dreamy Beats ✨</button>
+        </div>
+
+        <div id="musicDisk" class="cat-disk" title="Click for music menu">
+            <span class="disk-center">💿</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let currentPage = 1;
+        const totalPages = 60;
+
+        function updatePageContent() {
+            document.getElementById('page-indicator').innerText = `${currentPage} / ${totalPages}`;
+            
+            // Dynamic text updates per page
+            document.getElementById('long-left-caption').innerText = `Set ${currentPage} - A`;
+            document.getElementById('long-right-caption').innerText = `Set ${currentPage} - B`;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            if (currentPage < 1) currentPage = totalPages;
+            if (currentPage > totalPages) currentPage = 1;
+            updatePageContent();
+        }
+
+        function playLoveMessage() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance("I love you baby");
+                utterance.rate = 0.95;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Quiz State Machine Logic
+        function openQuiz() {
+            document.getElementById('quiz-modal').style.display = 'flex';
+            loadQuestion(1);
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-modal').style.display = 'none';
+        }
+
+        function loadQuestion(step) {
+            const qTitle = document.getElementById('quiz-question');
+            const btnContainer = document.getElementById('quiz-buttons');
+            btnContainer.innerHTML = '';
+
+            if (step === 1) {
+                qTitle.innerText = "Are you Estera?";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion(2)">Yes</button>
+                    <button class="quiz-ans-btn no-btn" onmouseenter="moveButton(this)">No</button>
+                `;
+            } else if (step === 2) {
+                qTitle.innerText = "Do you love sosa?";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion(3)">Yes</button>
+                    <button class="quiz-ans-btn no-btn" onmouseenter="moveButton(this)">No</button>
+                `;
+            } else if (step === 3) {
+                qTitle.innerText = "Sosa is gonna steal you away 💖";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion('3b')">No</button>
+                    <button class="quiz-ans-btn" onclick="loadQuestion(4)">Yes</button>
+                `;
+            } else if (step === '3b') {
+                qTitle.innerText = "Are you sureeee you??";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="loadQuestion('3c')">No baby im kidding</button>
+                    <button class="quiz-ans-btn no-btn" onmouseenter="moveButton(this)" onclick="alert('Caught you! 🤭'); loadQuestion(3);">Yes i am</button>
+                `;
+            } else if (step === '3c') {
+                qTitle.innerText = "Who's a good girl?";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="closeQuiz()" style="background: #111; color: #fff;">Mee, i amm!!!</button>
+                `;
+            } else if (step === 4) {
+                qTitle.innerText = "Not like you have a choice would have stolen you anyway <3";
+                btnContainer.innerHTML = `
+                    <button class="quiz-ans-btn" onclick="closeQuiz()" style="background: #111; color: #fff;">No fairr :c</button>
+                `;
+            }
+        }
+
+        // Fast & further away sliding animation for hovered buttons
+        function moveButton(btn) {
+            let randomX = (Math.random() - 0.5) * 200;
+            let randomY = (Math.random() - 0.5) * 120;
+            
+            btn.style.position = 'relative';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        // --- MUSIC WIDGET LOGIC ---
+        const musicDisk = document.getElementById("musicDisk");
+        const musicMenu = document.getElementById("musicMenu");
+        const bgAudio = document.getElementById("bgAudio");
+
+        musicDisk.onclick = function(e) {
+            e.stopPropagation();
+            if (musicMenu.style.display === "block") {
+                musicMenu.style.display = "none";
+            } else {
+                musicMenu.style.display = "block";
+            }
+        };
+
+        window.onclick = function(event) {
+            if (!musicMenu.contains(event.target) && event.target !== musicDisk && !musicDisk.contains(event.target)) {
+                musicMenu.style.display = "none";
+            }
+        };
+
+        function playSong(songUrl) {
+            bgAudio.src = songUrl;
+            bgAudio.play().catch(error => {
+                console.log("Audio playback error or file missing:", error);
+            });
+            musicDisk.classList.add("playing");
+            musicMenu.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
