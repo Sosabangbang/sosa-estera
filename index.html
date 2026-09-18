@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For Esti ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Full-Screen Light Pink Intro Overlay with Floating Words -->
+    <div id="welcomeModal" class="modal">
+        <div id="floatingWordsContainer"></div>
+        <div class="modal-content">
+            <div class="cat-badge"></div>
+            <h2>Estera's cute world!</h2>
+            <button id="replyBtn" class="cat-btn">Enter Estera's world</button>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Esti ✨</h2>
+        <a href="index.html" class="active">Home</a>
+        <a href="gallery.html">Memories</a>
+        <a href="letter.html">Letter</a>
+
+        <!-- Interactive Cute Couple Model with Names -->
+        <div class="cute-couple-box" onmouseenter="playLoveMessage()" title="Hover over us! 💕">
+            <svg viewBox="0 0 220 190" class="cute-couple-svg">
+                <!-- Left Figure (Woman with Dress) -->
+                <circle cx="65" cy="52" r="22" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <ellipse cx="58" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <ellipse cx="72" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <line x1="52" y1="57" x2="55" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="75" y1="57" x2="78" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Waving Arm Left -->
+                <path d="M 46,66 Q 30,54 35,42" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="35" cy="40" r="3.5" fill="#4a1525"/>
+                <!-- Dress -->
+                <path d="M 42,80 Q 65,75 88,80 L 102,145 Q 65,152 28,145 Z" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <!-- Legs & Feet -->
+                <line x1="52" y1="145" x2="46" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="43" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <line x1="78" y1="145" x2="84" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="87" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <!-- Right Arm (Holding hands) -->
+                <path d="M 80,90 L 100,112" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+
+                <!-- Right Figure (Guy) -->
+                <circle cx="155" cy="52" r="22" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <ellipse cx="148" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <ellipse cx="162" cy="50" rx="2.5" ry="4" fill="#4a1525"/>
+                <line x1="142" y1="57" x2="145" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="165" y1="57" x2="168" y2="62" stroke="#4a1525" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Torso -->
+                <path d="M 134,80 Q 155,75 176,80 L 170,145 Q 155,152 140,145 Z" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <!-- Left Arm (Holding hands) -->
+                <path d="M 140,90 L 120,112" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Joined hands circle -->
+                <circle cx="110" cy="112" r="5" fill="#fff" stroke="#4a1525" stroke-width="3.5"/>
+                <!-- Waving Arm Right -->
+                <path d="M 174,66 Q 190,54 185,42" fill="none" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="185" cy="40" r="3.5" fill="#4a1525"/>
+                <!-- Legs & Feet -->
+                <line x1="145" y1="145" x2="140" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="137" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+                <line x1="165" y1="145" x2="170" y2="170" stroke="#4a1525" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="173" cy="172" rx="6" ry="3.5" fill="#4a1525"/>
+
+                <!-- Floating Heart Between Them -->
+                <path d="M 110,80 Q 98,62 110,50 Q 122,62 110,80 Z" fill="#ff2442" stroke="#4a1525" stroke-width="2.5"/>
+            </svg>
+            <div class="couple-names">Estera X Sosa</div>
+        </div>
+
+        <!-- Cutesy Love Poem Box -->
+        <div class="sidebar-love-box">
+            <h3>To My Love ✨</h3>
+            <p>
+                Estera, my gorgeous lady<br>
+                you are the adorable girl<br>
+                who stumbled into my life<br>
+                when I least expected it.
+            </p>
+            <p>
+                You came in smoothly,<br>
+                like a cool breeze<br>
+                in the middle of autumn,<br>
+                carrying the refreshing scent of nature.
+            </p>
+            <p>
+                Everything about you draws me in:
+                the beautiful curve of your smile,
+                your captivating green eyes,
+                your grace, and your perfect height.
+            </p>
+            <p>
+                When you are smiling with pure joy,
+                that is what happiness truly is.
+                I love all the memories we have made
+                and all we have pushed through. ❤️
+            </p>
+            <p>
+                When I look at you, my heart beats
+                a melody composed just for you.
+                You have a unique, beautiful soul
+                connected entirely to mine, leaving<br>
+                me with pure love every moment i spend with you ✨
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1>Haiii, Estera!</h1>
+        <p>This is your little special world, I love you so much my darling!</p>
+
+        <!-- Family Tree Layout Container -->
+        <div class="family-container">
+            <!-- Left Branch (Sosa & Grazynka) -->
+            <div class="branch left-branch">
+                <div class="family-card">
+                    <div class="pic-frame">
+                        <img src="soosa.jpg" alt="Sosa" onerror="this.style.display='none'">
+                        <span class="placeholder-text">Sosa Photo</span>
+                    </div>
+                    <span class="name-label">Sosa</span>
+                    <a href="sosa.html" class="tree-btn">Open Page ✨</a>
+                </div>
+
+                <div class="family-card">
+                    <div class="pic-frame">
+                        <img src="grazynka.jpg" alt="Grazynka" onerror="this.style.display='none'">
+                        <span class="placeholder-text">Grazynka Photo</span>
+                    </div>
+                    <span class="name-label">Grazynka</span>
+                    <a href="grazynka.html" class="tree-btn">Open Page ✨</a>
+                </div>
+            </div>
+
+            <!-- Center Hub -->
+            <div class="center-hub">
+                <h3>Our small little family ❤️</h3>
+            </div>
+
+            <!-- Right Branch (Estera & Mania) -->
+            <div class="branch right-branch">
+                <div class="family-card">
+                    <div class="pic-frame">
+                        <img src="estera.jpg" alt="Estera" class="estera-img" onerror="this.style.display='none'">
+                        <span class="placeholder-text">Estera Photo</span>
+                    </div>
+                    <span class="name-label">Estera</span>
+                    <a href="estera.html" class="tree-btn">Open Page ✨</a>
+                </div>
+
+                <div class="family-card">
+                    <div class="pic-frame">
+                        <img src="mania.jpg" alt="Mania" onerror="this.style.display='none'">
+                        <span class="placeholder-text">Mania Photo</span>
+                    </div>
+                    <span class="name-label">Mania</span>
+                    <a href="mania.html" class="tree-btn">Open Page ✨</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Box on Bottom Left -->
+    <div class="main-countdown">
+        <h4>Our Special Timeline ✨</h4>
+        <p><strong>Known each other:</strong> <span id="metTime">Loading...</span></p>
+        <p><strong>Together:</strong> <span id="togetherTime">Loading...</span></p>
+        <p><strong>Sosa (19 Jan 2007):</strong> <span id="sosaAgeInfo">Loading...</span></p>
+        <p><strong>Estera (21 Jan 2009):</strong> <span id="esteraAgeInfo">Loading...</span></p>
+    </div>
+
+    <!-- Background Music Player Widget -->
+    <div id="musicPlayerWidget" class="music-widget">
+        <audio id="bgAudio" loop></audio>
+        
+        <div id="musicMenu" class="music-menu">
+            <h4>Choose a vibe 🎶</h4>
+            <button class="song-btn" onclick="playSong('song1.mp3')">Song 1: Cozy Lofi 🎧</button>
+            <button class="song-btn" onclick="playSong('song2.mp3')">Song 2: Sweet Melody 💕</button>
+            <button class="song-btn" onclick="playSong('song3.mp3')">Song 3: Dreamy Beats ✨</button>
+        </div>
+
+        <div id="musicDisk" class="cat-disk" title="Click for music menu">
+            <span class="disk-center">💿</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const modal = document.getElementById("welcomeModal");
+        const replyBtn = document.getElementById("replyBtn");
+        const floatingContainer = document.getElementById("floatingWordsContainer");
+
+        // --- SPEECH SYNTHESIS FOR COUPLE MODEL ---
+        function playLoveMessage() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance("I love you baby");
+                utterance.rate = 0.95;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // --- COUNTDOWN TIMER CONFIGURATION ---
+        const dateMet = new Date("2026-05-27T00:00:00");       
+        const dateTogether = new Date("2026-06-30T00:00:00"); 
+        const sosaBirthday = new Date("2007-01-19T00:00:00");
+        const esteraBirthday = new Date("2009-01-21T00:00:00");
+
+        function updateTimers() {
+            const now = new Date();
+            
+            function getElapsedTime(startDate) {
+                let diff = now - startDate;
+                if (diff < 0) diff = 0;
+                let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                let minutes = Math.floor((diff / (1000 * 60)) % 60);
+                let seconds = Math.floor((diff / 1000) % 60);
+                return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+
+            function getAge(birthDate) {
+                let diff = now - birthDate;
+                let ageDate = new Date(diff);
+                let years = Math.abs(ageDate.getUTCFullYear() - 1970);
+                let days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
+                return `${years} yrs, ${days} days`;
+            }
+
+            document.getElementById("metTime").innerText = getElapsedTime(dateMet);
+            document.getElementById("togetherTime").innerText = getElapsedTime(dateTogether);
+            document.getElementById("sosaAgeInfo").innerText = getAge(sosaBirthday);
+            document.getElementById("esteraAgeInfo").innerText = getAge(esteraBirthday);
+        }
+
+        setInterval(updateTimers, 1000);
+        updateTimers();
+
+        // --- FLOATING WORDS GENERATOR ---
+        const cutePhrases = [
+            "I love you Estera", 
+            "You mean the world to me sweetie", 
+            "I hope we last forever", 
+            "Our small little family", 
+            "MANIAAA", 
+            "GRAZYNKAAA", 
+            "SOSSAAA", 
+            "ESTERAAA", 
+            "I am sorry baby", 
+            "I love you dummie", 
+            "Gorgous", 
+            "Cutie", 
+            "My lady i love youu soo much"
+        ];
+
+        function spawnFloatingWord() {
+            if (modal.style.display === "none") return; 
+
+            const wordSpan = document.createElement("div");
+            wordSpan.className = "floating-word";
+            wordSpan.innerText = cutePhrases[Math.floor(Math.random() * cutePhrases.length)];
+
+            const randomX = Math.random() * (window.innerWidth - 220);
+            const randomY = Math.random() * (window.innerHeight - 120);
+
+            wordSpan.style.left = randomX + "px";
+            wordSpan.style.top = randomY + "px";
+
+            floatingContainer.appendChild(wordSpan);
+
+            setTimeout(() => {
+                wordSpan.remove();
+            }, 3000);
+        }
+
+        const wordInterval = setInterval(spawnFloatingWord, 400);
+
+        replyBtn.onclick = function() {
+            modal.style.display = "none";
+            clearInterval(wordInterval);
+        }
+
+        // --- MUSIC WIDGET LOGIC ---
+        const musicDisk = document.getElementById("musicDisk");
+        const musicMenu = document.getElementById("musicMenu");
+        const bgAudio = document.getElementById("bgAudio");
+
+        musicDisk.onclick = function(e) {
+            e.stopPropagation();
+            if (musicMenu.style.display === "block") {
+                musicMenu.style.display = "none";
+            } else {
+                musicMenu.style.display = "block";
+            }
+        };
+
+        window.onclick = function(event) {
+            if (!musicMenu.contains(event.target) && event.target !== musicDisk && !musicDisk.contains(event.target)) {
+                musicMenu.style.display = "none";
+            }
+        };
+
+        function playSong(songUrl) {
+            bgAudio.src = songUrl;
+            bgAudio.play().catch(error => {
+                console.log("Audio playback error or file missing:", error);
+            });
+            musicDisk.classList.add("playing");
+            musicMenu.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
